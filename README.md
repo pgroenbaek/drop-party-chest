@@ -1,2 +1,2 @@
 # Party Room Chest Value
-Show total GE value of the party room and clan hall chests.
+RuneLite plugin to show the total GE value of items in the party room and clan hall chests.
