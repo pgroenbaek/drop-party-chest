@@ -1,11 +1,11 @@
-package io.grnbk.droppartychestvalue;
+package io.grnbk.droppartychest;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
-@ConfigGroup("drop-party-chest-value")
-public interface DropPartyChestValueConfig extends Config
+@ConfigGroup("drop-party-chest")
+public interface DropPartyChestConfig extends Config
 {
 	@ConfigItem(
 		keyName = "showExact",

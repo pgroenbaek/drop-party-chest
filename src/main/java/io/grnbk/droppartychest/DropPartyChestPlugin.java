@@ -1,4 +1,4 @@
-package io.grnbk.droppartychestvalue;
+package io.grnbk.droppartychest;
 
 import com.google.inject.Provides;
 import javax.inject.Inject;
@@ -18,9 +18,9 @@ import net.runelite.client.util.QuantityFormatter;
 
 @Slf4j
 @PluginDescriptor(
-	name = "Drop Party Chest Value"
+	name = "Drop Party Chest"
 )
-public class DropPartyChestValuePlugin extends Plugin
+public class DropPartyChestPlugin extends Plugin
 {
 	private static final int CLANHALL_CHEST_ITEMS_CONTAINER_ID = 33684;
 	private static final int CLANHALL_CHEST_TITLE_WIDGET_ID = 51314689;
@@ -39,18 +39,18 @@ public class DropPartyChestValuePlugin extends Plugin
 	private ItemManager itemManager;
 
 	@Inject
-	private DropPartyChestValueConfig config;
+	private DropPartyChestConfig config;
 
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.info("Drop Party Chest Value started!");
+		log.info("Drop Party Chest started!");
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.info("Drop Party Chest Value stopped!");
+		log.info("Drop Party Chest stopped!");
 	}
 
 	@Subscribe
@@ -132,8 +132,8 @@ public class DropPartyChestValuePlugin extends Plugin
 	}
 
 	@Provides
-	DropPartyChestValueConfig provideConfig(ConfigManager configManager)
+	DropPartyChestConfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(DropPartyChestValueConfig.class);
+		return configManager.getConfig(DropPartyChestConfig.class);
 	}
 }

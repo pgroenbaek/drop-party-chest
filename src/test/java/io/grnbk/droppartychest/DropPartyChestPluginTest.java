@@ -1,13 +1,13 @@
-package io.grnbk.droppartychestvalue;
+package io.grnbk.droppartychest;
 
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 
-public class DropPartyChestValuePluginTest
+public class DropPartyChestPluginTest
 {
 	public static void main(String[] args) throws Exception
 	{
-		ExternalPluginManager.loadBuiltin(DropPartyChestValuePlugin.class);
+		ExternalPluginManager.loadBuiltin(DropPartyChestPlugin.class);
 		RuneLite.main(args);
 	}
 }
