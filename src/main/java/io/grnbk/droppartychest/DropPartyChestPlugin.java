@@ -44,13 +44,11 @@ public class DropPartyChestPlugin extends Plugin
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.info("Drop Party Chest started!");
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.info("Drop Party Chest stopped!");
 	}
 
 	@Subscribe
@@ -83,7 +81,8 @@ public class DropPartyChestPlugin extends Plugin
 		}
 
 		final long totalChestItemsValue = getTotalGrandExchangeValue(containerId);
-		if (totalChestItemsValue > 0) {
+		if (totalChestItemsValue > 0)
+		{
 			final String totalChestValueText = createValueText(totalChestItemsValue);
 			titleWidget.setText(title + totalChestValueText);
 		}
