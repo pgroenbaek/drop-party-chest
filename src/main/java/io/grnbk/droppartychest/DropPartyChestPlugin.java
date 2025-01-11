@@ -18,7 +18,9 @@ import net.runelite.client.util.QuantityFormatter;
 
 @Slf4j
 @PluginDescriptor(
-	name = "Drop Party Chest"
+	name = "Drop Party Chest",
+	description = "Display value of the party room and clan hall chests.",
+	tags = {"party", "room", "clan", "hall", "chest", "value"}
 )
 public class DropPartyChestPlugin extends Plugin
 {
@@ -40,16 +42,6 @@ public class DropPartyChestPlugin extends Plugin
 
 	@Inject
 	private DropPartyChestConfig config;
-
-	@Override
-	protected void startUp() throws Exception
-	{
-	}
-
-	@Override
-	protected void shutDown() throws Exception
-	{
-	}
 
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged event)
@@ -80,29 +72,31 @@ public class DropPartyChestPlugin extends Plugin
 			return;
 		}
 
-		final long totalChestItemsValue = getTotalGrandExchangeValue(containerId);
-		if (totalChestItemsValue > 0)
+		ItemContainer itemContainer = client.getItemContainer(containerId);
+		if (itemContainer != null)
 		{
-			final String totalChestValueText = createValueText(totalChestItemsValue);
-			titleWidget.setText(title + totalChestValueText);
-		}
-		else {
-			titleWidget.setText(title);
+			final long totalChestItemsValue = getTotalGrandExchangeValue(itemContainer.getItems());
+			if (totalChestItemsValue > 0)
+			{
+				final String totalChestValueText = createValueText(totalChestItemsValue);
+				titleWidget.setText(title + totalChestValueText);
+			}
+			else
+			{
+				titleWidget.setText(title);
+			}
 		}
 	}
 
-	private long getTotalGrandExchangeValue(int containerId)
+	private long getTotalGrandExchangeValue(Item[] items)
 	{
 		long grandExchangeValue = 0;
 
-		ItemContainer itemContainer = client.getItemContainer(containerId);
-		if (itemContainer != null) {
-			for (int i = 0; i < itemContainer.size(); ++i)
+		for (Item item : items)
+		{
+			if (item != null)
 			{
-				Item item = itemContainer.getItem(i);
-				if (item != null) {
-					grandExchangeValue += (long) itemManager.getItemPrice(item.getId()) * item.getQuantity();
-				}
+				grandExchangeValue += (long) itemManager.getItemPrice(item.getId()) * item.getQuantity();
 			}
 		}
 

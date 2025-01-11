@@ -26,7 +26,7 @@ dependencies {
 	testImplementation group: 'net.runelite', name:'jshell', version: runeLiteVersion
 }
 
-group = 'io.grnbk.chestvalue'
+group = 'io.grnbk.droppartychest'
 version = '1.0-SNAPSHOT'
 
 tasks.withType(JavaCompile).configureEach {
@@ -37,7 +37,7 @@ tasks.withType(JavaCompile).configureEach {
 tasks.register('shadowJar', Jar) {
 	dependsOn configurations.testRuntimeClasspath
 	manifest {
-		attributes('Main-Class': 'io.grnbk.chestvalue.PartyRoomChestValuePluginTest', 'Multi-Release': true)
+		attributes('Main-Class': 'io.grnbk.droppartychest.DropPartyChestPluginTest', 'Multi-Release': true)
 	}
 
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
