@@ -1,8 +1,8 @@
-# Party Room Chest
+# Drop Party Chest
 RuneLite plugin to show the total GE value of items in the party room and clan hall chests.
 
 ## Installation
-Search "Party Room Chest" in the external plugins section in the configuration menu.
+Search "Drop Party Chest" in the external plugins section in the configuration menu.
 
 Click the install button.
 
