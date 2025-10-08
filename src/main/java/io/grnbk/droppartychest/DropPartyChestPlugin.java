@@ -8,9 +8,11 @@ import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.widgets.Widget;
+import net.runelite.client.Notifier;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -40,8 +42,35 @@ public class DropPartyChestPlugin extends Plugin
 	@Inject
 	private ItemManager itemManager;
 
+    @Inject
+    private Notifier notifier;
+
 	@Inject
 	private DropPartyChestConfig config;
+
+    private boolean notifyChestValue = false;
+    private long currentThreshold;
+
+    @Override
+    protected void startUp() throws Exception
+    {
+        currentThreshold = config.getChestValueThreshold();
+    }
+
+    @Subscribe
+    public void onConfigChanged(ConfigChanged event)
+    {
+        if (!event.getGroup().equals("drop-party-chest"))
+        {
+            return;
+        }
+
+        if (event.getKey().equals("chestValueThreshold"))
+        {
+            currentThreshold = config.getChestValueThreshold();
+            notifyChestValue = false;
+        }
+    }
 
 	@Subscribe
 	public void onItemContainerChanged(ItemContainerChanged event)
@@ -76,6 +105,15 @@ public class DropPartyChestPlugin extends Plugin
 		if (itemContainer != null)
 		{
 			final long totalChestItemsValue = getTotalGrandExchangeValue(itemContainer.getItems());
+
+            if (checkChestValueExceeded(totalChestItemsValue))
+            {
+                String thresholdValue = QuantityFormatter.quantityToStackSize(currentThreshold);
+                String message = "Party chest value exceeds " + thresholdValue + "!";
+
+                notifier.notify(config.getChestValueNotification(), message);
+            }
+
 			if (totalChestItemsValue > 0)
 			{
 				final String totalChestValueText = createValueText(totalChestItemsValue);
@@ -87,6 +125,27 @@ public class DropPartyChestPlugin extends Plugin
 			}
 		}
 	}
+
+    private boolean checkChestValueExceeded(final long totalChestItemsValue)
+    {
+        if (currentThreshold == 0)
+        {
+            return false;
+        }
+        if (currentThreshold <= totalChestItemsValue)
+        {
+            if (!notifyChestValue)
+            {
+                notifyChestValue = true;
+                return true;
+            }
+        }
+        else
+        {
+            notifyChestValue = false;
+        }
+        return false;
+    }
 
 	private long getTotalGrandExchangeValue(Item[] items)
 	{
