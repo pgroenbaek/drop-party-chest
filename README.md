@@ -14,4 +14,6 @@ Alternatively you can check the "Show exact value" setting if you want to see th
 ### Chest Value Notifications
 In the plugin settings you can enable the "Chest value notification" setting to receive notifications when the chest value exceeds a certain threshold.
 
+To receive notifications you will need to have the chest interface open.
+
 By default, the threshold is set to 100k, and it can be adjusted using the "Chest value threshold" setting.
