@@ -20,10 +20,10 @@ public interface DropPartyChestConfig extends Config
 	}
 
     @ConfigItem(
-            keyName = "chestValueNotification",
-            name = "Chest value notification",
-            description = "Configures if chest value notifications are enabled.",
-            position = 1
+        keyName = "chestValueNotification",
+        name = "Chest value notification",
+        description = "Configures if chest value notifications are enabled.",
+        position = 1
     )
     default Notification getChestValueNotification()
     {
@@ -31,10 +31,10 @@ public interface DropPartyChestConfig extends Config
     }
 
     @ConfigItem(
-            keyName = "chestValueThreshold",
-            name = "Chest value threshold",
-            description = "The total value of the chest must exceed this amount to send a notification.",
-            position = 2
+        keyName = "chestValueThreshold",
+        name = "Chest value threshold",
+        description = "The total value of the chest must exceed this amount to send a notification.",
+        position = 2
     )
     default int getChestValueThreshold()
     {
