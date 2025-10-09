@@ -109,7 +109,7 @@ public class DropPartyChestPlugin extends Plugin
             if (checkChestValueExceeded(totalChestItemsValue))
             {
                 String thresholdValue = QuantityFormatter.quantityToStackSize(currentThreshold);
-                String message = "Party chest value exceeds " + thresholdValue + "!";
+                String message = "Party chest value exceeds " + thresholdValue + " gp!";
 
                 notifier.notify(config.getChestValueNotification(), message);
             }
