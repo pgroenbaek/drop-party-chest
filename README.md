@@ -1,4 +1,6 @@
 # Drop Party Chest
+[![](https://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/installs/plugin/drop-party-chest)](https://runelite.net/plugin-hub/show/drop-party-chest)
+
 RuneLite plugin to show the total GE value of items in the party room and clan hall chests.
 
 ## Installation
